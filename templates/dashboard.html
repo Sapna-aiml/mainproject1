@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATM Dashboard</title>
+</head>
+<body align="center">
+
+    <h2>Welcome to ATM</h2>
+
+    <h3>Balance: ₹{{ balance }}</h3>
+
+    <!-- 🔴 Deposit Error (sirf deposit ke niche) -->
+    {% if deposit_error %}
+        <p style="color:red">{{ deposit_error }}</p>
+    {% endif %}
+
+    <!-- Deposit Form -->
+    <form action="/deposit" method="post">
+        <input type="number" name="amount" placeholder="Deposit Amount">
+        <br><br>
+        <button type="submit">Deposit</button>
+    </form>
+
+    <br><br>
+
+    <!-- 🔴 Withdraw Error (sirf withdraw ke niche) -->
+    {% if withdraw_error %}
+        <p style="color:red">{{ withdraw_error }}</p>
+    {% endif %}
+
+    <!-- Withdraw Form -->
+    <form action="/withdraw" method="post">
+        <input type="number" name="amount" placeholder="Withdraw Amount">
+        <br><br>
+        <button type="submit">Withdraw</button>
+    </form>
+
+    <br><br>
+
+    <h3>Transaction History</h3>
+
+    <table border="1" align="center">
+        <tr>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Date & Time</th>
+        </tr>
+
+        {% for t in history %}
+        <tr>
+            <td>{{ t[0] }}</td>
+            <td>{{ t[1] }}</td>
+            <td>{{ t[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br><br>
+    <a href="/logout">Logout</a>
+
+</body>
+</html>
